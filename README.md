@@ -136,7 +136,7 @@ ant -version
 Clone repository:
 
 ```bash
-git clone https://github.com/NewX-Team/finpro-BYOS-kantin/tree/master
+git clone https://github.com/NewX-Team/finpro-BYOS-kantin.git
 ```
 
 Masuk ke folder project:
