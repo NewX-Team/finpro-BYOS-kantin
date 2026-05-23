@@ -9,10 +9,9 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 public class Dmas extends javax.swing.JFrame {
 
-    // ========== COLOR PALETTE ==========
     private static final Color BG_TOP = new Color(28, 30, 35);
     private static final Color BG_BOTTOM = new Color(18, 20, 25);
-    private static final Color ACCENT = new Color(255, 140, 50);        // Orange
+    private static final Color ACCENT = new Color(255, 140, 50);
     private static final Color ACCENT_HOVER = new Color(255, 165, 80);
     private static final Color CARD_BG = new Color(40, 42, 48);
     private static final Color INPUT_BG = new Color(50, 52, 58);
@@ -25,7 +24,6 @@ public class Dmas extends javax.swing.JFrame {
     private static final Color BTN_BACK = new Color(100, 100, 110);
     private static final Color BTN_BACK_HOVER = new Color(130, 130, 140);
 
-    // ========== FONTS ==========
     private static final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 28);
     private static final Font SUBTITLE_FONT = new Font("Segoe UI", Font.PLAIN, 13);
     private static final Font LABEL_FONT = new Font("Segoe UI", Font.BOLD, 13);
@@ -51,7 +49,6 @@ public class Dmas extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        // ========== MAIN PANEL ==========
         mainPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -59,7 +56,6 @@ public class Dmas extends javax.swing.JFrame {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                // Gradient Background
                 GradientPaint gradient = new GradientPaint(
                     0, 0, BG_TOP,
                     0, getHeight(), BG_BOTTOM
@@ -67,7 +63,6 @@ public class Dmas extends javax.swing.JFrame {
                 g2d.setPaint(gradient);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
 
-                // Grid pattern
                 g2d.setColor(new Color(255, 255, 255, 2));
                 for (int i = 0; i < getWidth(); i += 25) {
                     for (int j = 0; j < getHeight(); j += 25) {
@@ -75,7 +70,6 @@ public class Dmas extends javax.swing.JFrame {
                     }
                 }
 
-                // Fade-in overlay
                 if (opacity < 1f) {
                     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
                     g2d.setColor(BG_BOTTOM);
@@ -87,7 +81,6 @@ public class Dmas extends javax.swing.JFrame {
         mainPanel.setPreferredSize(new Dimension(400, 520));
         mainPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        // ========== HEADER ==========
         JLabel iconLabel = new JLabel("🍚");
         iconLabel.setFont(new Font("Segoe UI", Font.PLAIN, 45));
         iconLabel.setBounds(175, 15, 50, 55);
@@ -105,12 +98,10 @@ public class Dmas extends javax.swing.JFrame {
         subtitleLabel.setBounds(0, 100, 400, 18);
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Separator
         JSeparator sep = new JSeparator();
         sep.setForeground(new Color(255, 255, 255, 20));
         sep.setBounds(50, 130, 300, 1);
 
-        // ========== FORM CARD ==========
         JPanel formCard = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -128,13 +119,11 @@ public class Dmas extends javax.swing.JFrame {
         formCard.setOpaque(false);
         formCard.setBounds(30, 145, 340, 280);
 
-        // --- NAMA LABEL ---
         JLabel nameLabel = new JLabel("👤  Nama");
         nameLabel.setFont(LABEL_FONT);
         nameLabel.setForeground(TEXT_WHITE);
         nameLabel.setBounds(20, 20, 100, 20);
 
-        // --- NAMA INPUT ---
         nameField = new JTextField();
         nameField.setFont(INPUT_FONT);
         nameField.setForeground(TEXT_WHITE);
@@ -145,7 +134,6 @@ public class Dmas extends javax.swing.JFrame {
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
         nameField.setBounds(20, 45, 300, 40);
-        // Placeholder effect
         nameField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 if (nameField.getText().equals("Ketik nama kamu...")) {
@@ -163,13 +151,11 @@ public class Dmas extends javax.swing.JFrame {
         nameField.setText("Ketik nama kamu...");
         nameField.setForeground(TEXT_PLACEHOLDER);
 
-        // --- MENU LABEL ---
         JLabel menuLabel = new JLabel("🍽️  Pilih Menu");
         menuLabel.setFont(LABEL_FONT);
         menuLabel.setForeground(TEXT_WHITE);
         menuLabel.setBounds(20, 100, 120, 20);
 
-        // --- MENU COMBO ---
         foodCombo = new JComboBox<>(new String[] {
             "🍗 Rice Bowl Ayam Katsu",
             "🍖 Rice Bowl Ayam Teriyaki"
@@ -177,13 +163,11 @@ public class Dmas extends javax.swing.JFrame {
         styleComboBox(foodCombo);
         foodCombo.setBounds(20, 125, 300, 38);
 
-        // --- WAKTU LABEL ---
         JLabel timeLabel = new JLabel("🕐  Waktu Ambil");
         timeLabel.setFont(LABEL_FONT);
         timeLabel.setForeground(TEXT_WHITE);
         timeLabel.setBounds(20, 178, 120, 20);
 
-        // --- WAKTU COMBO ---
         timeCombo = new JComboBox<>(new String[] {
             "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00"
         });
@@ -197,8 +181,6 @@ public class Dmas extends javax.swing.JFrame {
         formCard.add(timeLabel);
         formCard.add(timeCombo);
 
-        // ========== BUTTONS ==========
-        // View Queue Button
         RoundedButton viewButton = new RoundedButton("👁  Lihat Antrian");
         viewButton.setFont(BUTTON_FONT);
         viewButton.setBackground(BTN_VIEW);
@@ -209,7 +191,6 @@ public class Dmas extends javax.swing.JFrame {
             new read("dmas").setVisible(true);
         });
 
-        // Order Button
         RoundedButton orderButton = new RoundedButton("✅ Pesan Sekarang");
         orderButton.setFont(BUTTON_FONT);
         orderButton.setBackground(ACCENT);
@@ -218,7 +199,6 @@ public class Dmas extends javax.swing.JFrame {
         orderButton.setBounds(210, 445, 160, 38);
         orderButton.addActionListener(e -> placeOrder());
 
-        // Back Button
         RoundedButton backButton = new RoundedButton("↩ Kembali");
         backButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         backButton.setBackground(BTN_BACK);
@@ -230,7 +210,6 @@ public class Dmas extends javax.swing.JFrame {
             this.dispose();
         });
 
-        // ========== ASSEMBLE ==========
         mainPanel.add(iconLabel);
         mainPanel.add(titleLabel);
         mainPanel.add(subtitleLabel);
@@ -244,14 +223,12 @@ public class Dmas extends javax.swing.JFrame {
         pack();
     }
 
-    // ========== STYLE COMBOBOX ==========
     private void styleComboBox(JComboBox<String> combo) {
         combo.setFont(INPUT_FONT);
         combo.setForeground(TEXT_WHITE);
         combo.setBackground(INPUT_BG);
         combo.setFocusable(false);
 
-        // Custom UI for dropdown styling
         combo.setUI(new BasicComboBoxUI() {
             @Override
             protected JButton createArrowButton() {
@@ -266,11 +243,9 @@ public class Dmas extends javax.swing.JFrame {
 
             @Override
             public void paintCurrentValueBackground(Graphics g, Rectangle bounds, boolean hasFocus) {
-                // No background highlight on selected item
             }
         });
 
-        // Custom renderer for dropdown items
         combo.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value,
@@ -291,14 +266,14 @@ public class Dmas extends javax.swing.JFrame {
         });
     }
 
-    // ========== PLACE ORDER ==========
     private void placeOrder() {
         String nama = nameField.getText().trim();
 
-        // Validasi
         if (nama.isEmpty() || nama.equals("Ketik nama kamu...")) {
-            shakeComponent(nameField);
-            showToast("⚠️  Mohon isi nama terlebih dahulu!");
+            CustomDialog.showError(this,
+                "⚠️  Nama Tidak Boleh Kosong!",
+                "Silakan isi nama kamu terlebih dahulu sebelum memesan.");
+            nameField.requestFocus();
             return;
         }
 
@@ -308,75 +283,14 @@ public class Dmas extends javax.swing.JFrame {
         write write = new write();
         write.write("dmas", nama, makanan, waktu);
 
-        // Reset form
+        CustomDialog.showOrderSuccess(this, nama, makanan, waktu);
+
         nameField.setText("Ketik nama kamu...");
         nameField.setForeground(TEXT_PLACEHOLDER);
         foodCombo.setSelectedIndex(0);
         timeCombo.setSelectedIndex(0);
     }
 
-    // ========== SHAKE ANIMATION (Error) ==========
-    private void shakeComponent(JComponent component) {
-        final int originalX = component.getX();
-        Timer shakeTimer = new Timer(30, null);
-        final int[] count = {0};
-        shakeTimer.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (count[0] >= 8) {
-                    component.setLocation(originalX, component.getY());
-                    shakeTimer.stop();
-                    return;
-                }
-                int offset = (count[0] % 2 == 0) ? 5 : -5;
-                component.setLocation(originalX + offset, component.getY());
-                count[0]++;
-            }
-        });
-        shakeTimer.start();
-        nameField.requestFocus();
-    }
-
-    // ========== TOAST NOTIFICATION ==========
-    private void showToast(String message) {
-        JDialog toast = new JDialog(this);
-        toast.setUndecorated(true);
-        toast.setBackground(new Color(0, 0, 0, 0));
-
-        JPanel toastPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2d.setColor(new Color(40, 40, 45, 230));
-                g2d.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
-            }
-        };
-        toastPanel.setLayout(new BorderLayout());
-        toastPanel.setPreferredSize(new Dimension(280, 45));
-
-        JLabel msgLabel = new JLabel(message, SwingConstants.CENTER);
-        msgLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        msgLabel.setForeground(TEXT_WHITE);
-        toastPanel.add(msgLabel, BorderLayout.CENTER);
-
-        toast.add(toastPanel);
-        toast.pack();
-
-        // Position above the window
-        Point frameLoc = this.getLocationOnScreen();
-        toast.setLocation(frameLoc.x + (this.getWidth() - toast.getWidth()) / 2,
-                         frameLoc.y + 20);
-        toast.setVisible(true);
-
-        // Auto close
-        Timer closeTimer = new Timer(1800, e -> toast.dispose());
-        closeTimer.setRepeats(false);
-        closeTimer.start();
-    }
-
-    // ========== FADE-IN ==========
     private void startFadeIn() {
         fadeTimer = new Timer(18, new AbstractAction() {
             @Override
@@ -392,7 +306,6 @@ public class Dmas extends javax.swing.JFrame {
         fadeTimer.start();
     }
 
-    // ========== CUSTOM ROUNDED BUTTON ==========
     private static class RoundedButton extends JButton {
         private Color hoverColor;
         private Color originalBg;
@@ -449,7 +362,6 @@ public class Dmas extends javax.swing.JFrame {
         }
     }
 
-    // ========== MAIN ==========
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
